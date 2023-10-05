@@ -17,7 +17,7 @@ spec:
       children: []
       envSecretRefName: seldon-rclone-secret
       implementation: CUSTOM_IMPLEMENTATION
-      modelUri: s3://mlflow/0/d3ac0e6fa8824a2980b8041c05612b66/artifacts/cross_encoder_pyfunc
+      modelUri: s3://mlflow/0/testing/artifacts/cross_encoder_pyfunc
       name: ensemble
     name: ensemble
   protocol: v2
