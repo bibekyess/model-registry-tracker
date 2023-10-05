@@ -1,1 +1,23 @@
-test
+apiVersion: machinelearning.seldon.io/v1alpha2
+kind: SeldonDeployment
+metadata:
+  name: ensemble
+  namespace: seldon
+spec:
+  name: ensemble
+  predictors:
+  - componentSpecs:
+    - spec:
+        containers:
+        - env:
+          - name: MLSERVER_MODELS_DIR
+            value: /mnt/models
+          name: ensemble
+    graph:
+      children: []
+      envSecretRefName: seldon-rclone-secret
+      implementation: CUSTOM_IMPLEMENTATION
+      modelUri: s3://mlflow/0/testinkhjaig/artifacts/cross_encoder_pyfunc
+      name: ensemble
+    name: ensemble
+  protocol: v2
