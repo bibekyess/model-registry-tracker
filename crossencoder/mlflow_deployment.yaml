@@ -1,0 +1,23 @@
+apiVersion: machinelearning.seldon.io/v1alpha2
+kind: SeldonDeployment
+metadata:
+  name: cross-encoder-mlflow
+  namespace: seldon
+spec:
+  name: cross-encoder-mlflow
+  protocol: v2
+  predictors:
+    - name: cross-encoder-mlflow
+      graph:
+        children: []
+        implementation: CUSTOM_IMPLEMENTATION
+        modelUri: s3://mlflow/1/0c3e84bc1a334be885c47456b30662f0/artifacts/cross_encoder_pyfunc #FIXME
+        envSecretRefName: seldon-rclone-secret
+        name: cross-encoder-mlflow
+      componentSpecs:
+        - spec:
+            containers:
+            - name: cross-encoder-mlflow
+              env:
+              - name: MLSERVER_MODELS_DIR
+                value: "/mnt/models"
