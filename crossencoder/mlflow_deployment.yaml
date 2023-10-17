@@ -5,19 +5,19 @@ metadata:
   namespace: seldon
 spec:
   name: cross-encoder-mlflow
-  protocol: v2
   predictors:
-    - name: cross-encoder-mlflow
-      graph:
-        children: []
-        implementation: CUSTOM_IMPLEMENTATION
-        modelUri: s3://mlflow/1/0a163e171a374326bf24f8ae2ea7a764/artifacts/cross_encoder_pyfunc #FIXME
-        envSecretRefName: seldon-rclone-secret
-        name: cross-encoder-mlflow
-      componentSpecs:
-        - spec:
-            containers:
-            - name: cross-encoder-mlflow
-              env:
-              - name: MLSERVER_MODELS_DIR
-                value: "/mnt/models"
+  - componentSpecs:
+    - spec:
+        containers:
+        - env:
+          - name: MLSERVER_MODELS_DIR
+            value: /mnt/models
+          name: cross-encoder-mlflow
+    graph:
+      children: []
+      envSecretRefName: seldon-rclone-secret
+      implementation: CUSTOM_IMPLEMENTATION
+      modelUri: s3://mlflow/0/d3ac0e6fa8824a2980b8041c05612b66/artifacts/cross_encoder_pyfunc
+      name: cross-encoder-mlflow
+    name: cross-encoder-mlflow
+  protocol: v2
